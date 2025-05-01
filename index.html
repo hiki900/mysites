@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gold Rush vs. Bitcoin: Analysis</title>
+  <script src="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+  <div id="root"></div>
+  <script>
+    const e = React.createElement;
+
+    function App() {
+      return e('div', { className: 'min-h-screen bg-gray-100 font-sans' },
+        e('header', { className: 'bg-blue-600 text-white py-6' },
+          e('div', { className: 'container mx-auto px-4' },
+            e('h1', { className: 'text-3xl font-bold' }, 'Gold Rush vs. Bitcoin: Market Analysis'),
+            e('nav', { className: 'mt-4' },
+              e('ul', { className: 'flex space-x-4' },
+                e('li', null, e('a', { href: '#infographic', className: 'hover:underline' }, 'Infographic')),
+                e('li', null, e('a', { href: '#analysis', className: 'hover:underline' }, 'Analysis')),
+                e('li', null, e('a', { href: '#images', className: 'hover:underline' }, 'Price Targets'))
+              )
+            )
+          )
+        ),
+
+        // Infographic section
+        e('section', { id: 'infographic', className: 'py-12' },
+          e('div', { className: 'container mx-auto px-4' },
+            e('h2', { className: 'text-2xl font-bold mb-6' }, 'Infographic: Gold Rush vs. Bitcoin'),
+            e('div', { className: 'bg-white p-6 rounded-lg shadow-md' },
+              e('p', { className: 'mb-4' }, e('strong', null, 'Layout:'), ' Two-column comparison (Gold Rush | Bitcoin) with a central timeline.'),
+              e('p', { className: 'mb-4' }, e('strong', null, 'Visual Elements:'), ' Gold nuggets for Gold Rush; Bitcoin logos for Bitcoin.'),
+              e('p', { className: 'mb-4' }, e('strong', null, 'Sections:')),
+              e('ul', { className: 'list-disc pl-6 mb-4' },
+                e('li', null, e('strong', null, 'Timeline'), ': Gold Rush (1848–1855, 2004 ETF); Bitcoin (2009–2025, 2024 ETF).'),
+                e('li', null, e('strong', null, 'Market Impact'), ': Gold: 346% post-ETF; Bitcoin: 108% ($45,000 to $94,000).'),
+                e('li', null, e('strong', null, 'Accessibility'), ': Gold ETFs simplified physical investment; Bitcoin ETFs enabled broker access.'),
+                e('li', null, e('strong', null, 'Scarcity'), ': Gold supply grows; Bitcoin capped at 21M.'),
+                e('li', null, e('strong', null, 'Drivers'), ': Gold: Industrial, safe-haven; Bitcoin: Institutional, tech.')
+              )
+            )
+          )
+        ),
+
+        // Analysis section
+        e('section', { id: 'analysis', className: 'py-12 bg-gray-50' },
+          e('div', { className: 'container mx-auto px-4' },
+            e('h2', { className: 'text-2xl font-bold mb-6' }, 'Technical Analysis: Bitcoin Post-ETF'),
+            e('div', { className: 'bg-white p-6 rounded-lg shadow-md' },
+              e('h3', { className: 'text-xl font-semibold mb-4' }, 'Current Market (May 1, 2025)'),
+              e('p', null, 'Bitcoin: $94,000 | Gold: $3,223.25/oz | Bitcoin/Gold Ratio: ~29.16'),
+              e('h3', { className: 'text-xl font-semibold mt-6 mb-4' }, 'Historical Parallels'),
+              e('p', null, 'Gold’s 346% surge post-2004 ETF mirrors Bitcoin’s 108% rise since January 2024. ETFs drove $120.5B in Bitcoin AUM by December 2024.'),
+              e('h3', { className: 'text-xl font-semibold mt-6 mb-4' }, 'Technical Indicators'),
+              e('ul', { className: 'list-disc pl-6 mb-4' },
+                e('li', null, e('strong', null, 'Bitcoin/Gold Ratio'), ': Current 29.16; targets 41 ($135,000) or 123 ($396,000).'),
+                e('li', null, e('strong', null, 'Moving Averages'), ': 50-day SMA ($85,637), 200-day SMA ($86,226), both rising.'),
+                e('li', null, e('strong', null, 'RSI'), ': 68.11 (neutral, room for growth).'),
+                e('li', null, e('strong', null, 'Fibonacci'), ': 100% retracement ($109,000); 161.8% extension ($150,000).')
+              ),
+              e('h3', { className: 'text-xl font-semibold mt-6 mb-4' }, 'Scenarios (2025–2026)'),
+              e('p', null, e('strong', null, 'Bullish ($135,000–$150,000, 45%):'), ' ETF inflows, halving, regulations drive breakout to $150,000 by Q2 2026.'),
+              e('p', null, e('strong', null, 'Neutral ($80,000–$100,000, 35%):'), ' Consolidation between $80,000–109,000 if inflows slow.'),
+              e('p', null, e('strong', null, 'Bearish ($45,000–$60,000, 20%):'), ' Regulatory or macro shocks could push Bitcoin to $45,000 if the ratio drops to 14.'),
+              e('h3', { className: 'text-xl font-semibold mt-6 mb-4' }, 'Risks'),
+              e('p', null, 'Regulatory crackdowns, strong dollar, volatility, or mining energy concerns.')
+            )
+          )
+        ),
+
+        // Image section
+        e('section', { id: 'images', className: 'py-12' },
+          e('div', { className: 'container mx-auto px-4' },
+            e('h2', { className: 'text-2xl font-bold mb-6' }, 'Bitcoin Price Target Charts'),
+            e('div', { className: 'grid grid-cols-1 md:grid-cols-3 gap-6' },
+              ['bullish', 'neutral', 'bearish'].map((type, idx) =>
+                e('div', { key: idx, className: 'bg-white p-6 rounded-lg shadow-md' },
+                  e('h3', { className: 'text-lg font-semibold mb-4' },
+                    type === 'bullish' ? 'Bullish Target: $150,000' :
+                    type === 'neutral' ? 'Neutral Target: $80,000–$100,000' :
+                    'Bearish Target: $45,000'
+                  ),
+                  e('img', { src: `btc_${type}.png`, alt: `Bitcoin ${type} Chart`, className: 'w-full rounded' })
+                )
+              )
+            )
+          )
+        ),
+
+        // Footer
+        e('footer', { className: 'bg-gray-800 text-white py-6' },
+          e('div', { className: 'container mx-auto px-4' },
+            e('p', null, e('strong', null, 'Deployment Instructions:'), ' Save this file as `index.html`. Host on GitHub Pages, Netlify, or Vercel.'),
+            e('p', { className: 'mt-2' }, e('strong', null, 'Sources:'), ' LiteFinance, CoinCodex, Binance, Forbes, X posts (@MerlijnTrader, @KobeissiLetter).'),
+            e('p', { className: 'mt-2' }, 'Generated by Grok 3, xAI, May 1, 2025.')
+          )
+        )
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(e(App));
+  </script>
+</body>
+</html>
