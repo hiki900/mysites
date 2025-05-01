@@ -1,0 +1,157 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gold Rush vs. Bitcoin: Analysis</title>
+  <script src="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/babel-standalone@7.22.9/babel.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const App = () => {
+      return (
+        <div className="min-h-screen bg-gray-100 font-sans">
+          {/* Header */}
+          <header className="bg-blue-600 text-white py-6">
+            <div className="container mx-auto px-4">
+              <h1 className="text-3xl font-bold">Gold Rush vs. Bitcoin: Market Analysis</h1>
+              <nav className="mt-4">
+                <ul className="flex space-x-4">
+                  <li><a href="#infographic" className="hover:underline">Infographic</a></li>
+                  <li><a href="#analysis" className="hover:underline">Analysis</a></li>
+                  <li><a href="#images" className="hover:underline">Price Targets</a></li>
+                </ul>
+              </nav>
+            </div>
+          </header>
+
+          {/* Infographic Section */}
+          <section id="infographic" className="py-12">
+            <div className="container mx-auto px-4">
+              <h2 className="text-2xl font-bold mb-6">Infographic: Gold Rush vs. Bitcoin</h2>
+              <div className="bg-white p-6 rounded-lg shadow-md">
+                <p className="mb-4"><strong>Layout:</strong> Two-column comparison (Gold Rush | Bitcoin) with a central timeline.</p>
+                <p className="mb-4"><strong>Visual Elements:</strong> Gold nuggets for Gold Rush; Bitcoin logos for Bitcoin.</p>
+                <p className="mb-4"><strong>Sections:</strong></p>
+                <ul className="list-disc pl-6 mb-4">
+                  <li><strong>Timeline</strong>: Gold Rush (1848–1855, 2004 ETF); Bitcoin (2009–2025, 2024 ETF).</li>
+                  <li><strong>Market Impact</strong>: Gold: 346% post-ETF; Bitcoin: 108% ($45,000 to $94,000).</li>
+                  <li><strong>Accessibility</strong>: Gold ETFs simplified physical investment; Bitcoin ETFs enabled broker access.</li>
+                  <li><strong>Scarcity</strong>: Gold supply grows; Bitcoin capped at 21M.</li>
+                  <li><strong>Drivers</strong>: Gold: Industrial, safe-haven; Bitcoin: Institutional, tech.</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          {/* Analysis Section */}
+          <section id="analysis" className="py-12 bg-gray-50">
+            <div className="container mx-auto px-4">
+              <h2 className="text-2xl font-bold mb-6">Technical Analysis: Bitcoin Post-ETF</h2>
+              <div className="bg-white p-6 rounded-lg shadow-md">
+                <h3 className="text-xl font-semibold mb-4">Current Market (May 1, 2025)</h3>
+                <p>Bitcoin: $94,000 | Gold: $3,223.25/oz | Bitcoin/Gold Ratio: ~29.16</p>
+                
+                <h3 className="text-xl font-semibold mt-6 mb-4">Historical Parallels</h3>
+                <p>Gold’s 346% surge post-2004 ETF mirrors Bitcoin’s 108% rise since January 2024. ETFs drove $120.5B in Bitcoin AUM by December 2024.</p>
+                
+                <h3 className="text-xl font-semibold mt-6 mb-4">Technical Indicators</h3>
+                <ul className="list-disc pl-6 mb-4">
+                  <li><strong>Bitcoin/Gold Ratio</strong>: Current 29.16; targets 41 ($135,000) or 123 ($396,000).</li>
+                  <li><strong>Moving Averages</strong>: 50-day SMA ($85,637), 200-day SMA ($86,226), both rising.</li>
+                  <li><strong>RSI</strong>: 68.11 (neutral, room for growth).</li>
+                  <li><strong>Fibonacci</strong>: 100% retracement ($109,000); 161.8% extension ($150,000).</li>
+                </ul>
+                
+                <h3 className="text-xl font-semibold mt-6 mb-4">Scenarios (2025–2026)</h3>
+                <p><strong>Bullish ($135,000–$150,000, 45%):</strong> ETF inflows, halving, regulations drive breakout to $150,000 by Q2 2026.</p>
+                <p><strong>Neutral ($80,000–$100,000, 35%):</strong> Consolidation between $80,000–$109,000 if inflows slow.</Physical Bitcoin rose from $0.0008 in 2009 to $94,000 in 2025, while gold’s supply grows, Bitcoin’s 21M cap ensures scarcity. Institutional adoption via ETFs mirrors gold’s post-2004 ETF boom. Bitcoin could outperform gold, with a potential ratio of 41–123.</p>
+                <p><strong>Bearish ($45,000–$60,000, 20%):</strong> Regulatory or macro shocks could push Bitcoin to $45,000 if the ratio drops to 14.</p>
+                
+                <h3 className="text-xl font-semibold mt-6 mb-4">Risks</h3>
+                <p>Regulatory crackdowns, strong dollar, volatility, or mining energy concerns.</p>
+              </div>
+            </div>
+          </section>
+
+          {/* Image Section */}
+          <section id="images" className="py-12">
+            <div className="container mx-auto px-4">
+              <h2 className="text-2xl font-bold mb-6">Bitcoin Price Target Charts</h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="bg-white p-6 rounded-lg shadow-md">
+                  <h3 className="text-lg font-semibold mb-4">Bullish Target: $150,000</h3>
+                  <p>Placeholder for chart showing Bitcoin reaching $150,000 by Q2 2026.</p>
+                </div>
+                <div className="bg-white p-6 rounded-lg shadow-md">
+                  <h3 className="text-lg font-semibold mb-4">Neutral Target: $80,000–$100,000</h3>
+                  <p>Placeholder for chart showing Bitcoin consolidating at $80,000–$100,000.</p>
+                </div>
+                <div className="bg-white p-6 rounded-lg shadow-md">
+                  <h3 className="text-lg font-semibold mb-4">Bearish Target: $45,000</h3>
+                  <p>Placeholder for chart showing Bitcoin dropping to $45,000.</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Footer */}
+          <footer className="bg-gray-800 text-white py-6">
+            <div className="container mx-auto px-4">
+              <p><strong>Deployment Instructions:</strong> Save this file as `index.html`. Host on GitHub Pages, Netlify, or Vercel by uploading to a repository or dragging into the platform’s interface. Ensure CDN links are active.</p>
+              <p className="mt-2"><strong>Sources:</strong> LiteFinance, CoinCodex, Binance, Forbes, X posts (@MerlijnTrader, @KobeissiLetter).</p>
+              <p className="mt-2">Generated by Grok 3, xAI, May 1, 2025.</p>
+            </div>
+          </footer>
+        </div>
+      );
+    };
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>
